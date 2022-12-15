@@ -11,7 +11,7 @@ then
   sudo chown ${USER}:${USER} -R /opt/hadoop-3.3.0
   sudo ln -s /opt/hadoop-3.3.0 /opt/hadoop
   cp -rf /configs/opt/hadoop/etc/hadoop/* /opt/hadoop/etc/hadoop/.
-  cp -f /configs/.profile /home/itversity/.profile
+  cp -f /configs/.profile /home/minion01/.profile
   . ~/.profile
   /opt/hadoop/bin/hdfs namenode -format
   tar xzf /softwares/apache-hive-3.1.2-bin.tar.gz -C /softwares
@@ -45,7 +45,7 @@ then
   /opt/hadoop/sbin/start-dfs.sh
   /opt/hadoop/sbin/start-yarn.sh
 
-  hdfs dfs -mkdir -p /user/itversity
+  hdfs dfs -mkdir -p /user/minion01
 
   hdfs dfs -mkdir -p /spark2-jars
   hdfs dfs -mkdir -p /spark2-logs
@@ -63,5 +63,5 @@ else
   /opt/hadoop/sbin/start-yarn.sh
 fi
 
-sudo chown -R itversity:itversity /home/itversity/itversity-material
-/home/itversity/.local/bin/jupyter lab --ip 0.0.0.0
+sudo chown -R minion01:minion01 /home/minion01/minion01-material
+/home/minion01/.local/bin/jupyter lab --ip 0.0.0.0

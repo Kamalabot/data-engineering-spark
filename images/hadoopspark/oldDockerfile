@@ -6,27 +6,27 @@ RUN apt update && \
     apt install sudo telnet groff postgresql-client vim -y && \
     rm -rf /var/lib/apt/lists/*
 
-RUN adduser --disabled-password --gecos "" minion01 && \
-    echo "minion01:minion01" | chpasswd && \
-    adduser minion01 sudo
+RUN adduser --disabled-password --gecos "" itversity && \
+    echo "itversity:itversity" | chpasswd && \
+    adduser itversity sudo
 
 RUN sed -i "s/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD:ALL/g" /etc/sudoers
 
-USER minion01 
+USER itversity
 
-WORKDIR /home/minion01
-COPY --chown=minion01:minion01 .ssh .ssh
+WORKDIR /home/itversity
+COPY --chown=itversity:itversity .ssh .ssh
 RUN chmod 700 -R .ssh
 
-COPY --chown=minion01:minion01 requirements.txt /requirements.txt
+COPY --chown=itversity:itversity requirements.txt /requirements.txt
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install -r /requirements.txt
 
-COPY --chown=minion01:minion01 softwares /softwares
-COPY --chown=minion01:minion01 deploy.sh /deploy.sh
-COPY --chown=minion01:minion01 configs/.profile .profile
-COPY --chown=minion01:minion01 configs /configs
-COPY --chown=minion01:minion01 kernels .kernels
+COPY --chown=itversity:itversity softwares /softwares
+COPY --chown=itversity:itversity deploy.sh /deploy.sh
+COPY --chown=itversity:itversity configs/.profile .profile
+COPY --chown=itversity:itversity configs /configs
+COPY --chown=itversity:itversity kernels .kernels
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 ENV HADOOP_HOME=/opt/hadoop
@@ -37,7 +37,7 @@ ENV SPARK2_HOME=/opt/spark2
 ENV PATH=$PATH:${SPARK2_HOME}/bin
 ENV SPARK3_HOME=/opt/spark3
 ENV PATH=$PATH:${SPARK3_HOME}/bin
-ENV PATH=$PATH:/home/minion01/.local/bin
+ENV PATH=$PATH:/home/itversity/.local/bin
 
 RUN jupyter kernelspec \
     install .kernels/pyspark2 \
