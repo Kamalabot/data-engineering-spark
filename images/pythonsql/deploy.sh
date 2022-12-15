@@ -6,4 +6,4 @@ then
 #  sudo chown -R itversity:itversity /home/itversity/itversity-material
 fi
 
-/home/itversity/.local/bin/jupyter lab --ip 0.0.0.0
+/home/minion01/.local/bin/jupyter lab --ip 0.0.0.0
